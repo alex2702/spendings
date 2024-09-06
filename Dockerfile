@@ -60,12 +60,12 @@ EOT
 # LEAVE THIS OUT if your application is NOT a proper Python package.
 # We can’t use `uv sync` here because that only does editable installs:
 # <https://github.com/astral-sh/uv/issues/5792>
-COPY . /src
-RUN --mount=type=cache,target=/root/.cache \
-    uv pip install \
-        --python=$UV_PROJECT_ENVIRONMENT \
-        --no-deps \
-        /src
+#COPY . /src
+#RUN --mount=type=cache,target=/root/.cache \
+#    uv pip install \
+#        --python=$UV_PROJECT_ENVIRONMENT \
+#        --no-deps \
+#        /src
 
 
 ##########################################################################
@@ -112,7 +112,7 @@ COPY --from=build --chown=app:app /app /app
 # If your application is NOT a proper Python package that got
 # pip-installed above, you need to copy your application into
 # the container HERE:
-# COPY . /app/whereever-your-entrypoint-finds-it
+COPY . /app/
 
 USER app
 WORKDIR /app
@@ -122,5 +122,5 @@ WORKDIR /app
 RUN <<EOT
 python -V
 python -Im site
-python -Ic 'import the_app'
+python -Ic 'import spendings'
 EOT
