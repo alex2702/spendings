@@ -103,7 +103,7 @@ rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 EOT
 
 COPY docker-entrypoint.sh /
-COPY uwsgi.ini /app/etc/uwsgi.ini
+#COPY uwsgi.ini /app/etc/uwsgi.ini
 
 # Copy the pre-built `/app` directory to the runtime container
 # and change the ownership to user app and group app in one step.
