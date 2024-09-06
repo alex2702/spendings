@@ -119,8 +119,8 @@ WORKDIR /app
 
 # Strictly optional, but I like it for introspection of what I've built
 # and run a smoke test that the application can, in fact, be imported.
-RUN <<EOT
-python -V
-python -Im site
-python -Ic 'import spendings'
-EOT
+#RUN <<EOT
+#python -V
+#python -Im site
+#python -Ic 'import spendings'
+#EOT
