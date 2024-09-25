@@ -7,6 +7,7 @@ requires-python = ">=3.12"
 dependencies = [
     "django>=5.1.1",
     "gunicorn>=23.0.0",
+    "django-environ>=0.11.2",
 ]
 
 [build-system]
