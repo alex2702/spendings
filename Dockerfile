@@ -103,8 +103,10 @@ rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 EOT
 
 RUN ls .
+RUN ls /bin
+RUN ls /usr
 
-RUN DJANGO_SETTINGS_MODULE="spendings.settings.build" python manage.py collectstatic --noinput
+RUN DJANGO_SETTINGS_MODULE="spendings.settings.build" /bin/python manage.py collectstatic --noinput
 
 COPY docker-entrypoint.sh /
 RUN ["chmod", "+x", "/docker-entrypoint.sh"]
