@@ -110,15 +110,15 @@ RUN ["chmod", "+x", "/docker-entrypoint.sh"]
 # and change the ownership to user app and group app in one step.
 COPY --from=build --chown=app:app /app /app
 
-RUN ls .
-RUN ls app
-
-RUN DJANGO_SETTINGS_MODULE="spendings.settings.build" python app/manage.py collectstatic --noinput
-
 # If your application is NOT a proper Python package that got
 # pip-installed above, you need to copy your application into
 # the container HERE:
 COPY . /app/
+
+RUN ls .
+RUN ls app
+
+RUN DJANGO_SETTINGS_MODULE="spendings.settings.build" python app/manage.py collectstatic --noinput
 
 USER app
 WORKDIR /app
