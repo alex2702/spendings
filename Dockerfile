@@ -102,6 +102,10 @@ apt-get clean
 rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 EOT
 
+RUN ls .
+
+RUN DJANGO_SETTINGS_MODULE="spendings.settings.build" python manage.py collectstatic --noinput
+
 COPY docker-entrypoint.sh /
 RUN ["chmod", "+x", "/docker-entrypoint.sh"]
 #COPY uwsgi.ini /app/etc/uwsgi.ini
@@ -117,10 +121,6 @@ COPY . /app/
 
 USER app
 WORKDIR /app
-
-RUN ls .
-
-RUN DJANGO_SETTINGS_MODULE="spendings.settings.build" python manage.py collectstatic --noinput
 
 # Strictly optional, but I like it for introspection of what I've built
 # and run a smoke test that the application can, in fact, be imported.
