@@ -111,8 +111,9 @@ RUN ["chmod", "+x", "/docker-entrypoint.sh"]
 COPY --from=build --chown=app:app /app /app
 
 RUN ls .
+RUN ls app
 
-RUN DJANGO_SETTINGS_MODULE="spendings.settings.build" python manage.py collectstatic --noinput
+RUN DJANGO_SETTINGS_MODULE="spendings.settings.build" python app/manage.py collectstatic --noinput
 
 # If your application is NOT a proper Python package that got
 # pip-installed above, you need to copy your application into
