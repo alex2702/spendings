@@ -103,7 +103,8 @@ rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 EOT
 
 RUN ls .
-RUN ls /usr/bin
+RUN ls /
+RUN if [ -d "app" ]; then ls app fi
 
 RUN DJANGO_SETTINGS_MODULE="spendings.settings.build" /bin/python3.12 manage.py collectstatic --noinput
 
