@@ -102,12 +102,6 @@ apt-get clean
 rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 EOT
 
-RUN ls .
-RUN ls /
-RUN if [ -d "app" ]; then ls app fi
-
-RUN DJANGO_SETTINGS_MODULE="spendings.settings.build" /bin/python3.12 manage.py collectstatic --noinput
-
 COPY docker-entrypoint.sh /
 RUN ["chmod", "+x", "/docker-entrypoint.sh"]
 #COPY uwsgi.ini /app/etc/uwsgi.ini
@@ -115,6 +109,10 @@ RUN ["chmod", "+x", "/docker-entrypoint.sh"]
 # Copy the pre-built `/app` directory to the runtime container
 # and change the ownership to user app and group app in one step.
 COPY --from=build --chown=app:app /app /app
+
+RUN ls .
+
+RUN DJANGO_SETTINGS_MODULE="spendings.settings.build" python manage.py collectstatic --noinput
 
 # If your application is NOT a proper Python package that got
 # pip-installed above, you need to copy your application into
